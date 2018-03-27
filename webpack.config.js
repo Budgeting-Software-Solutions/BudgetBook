@@ -1,19 +1,28 @@
-var config = {
-    entry: "./frontend/index.js",
+let config = {
+    entry: './main.js', // entry point
     output: {
-        filename: "./frontend/bundle.js"
+      filename: 'index.js', // place where bundled app will be served
+    },
+    devServer: {
+      inline: true, // autorefresh
+      port: 3000, // development port server
     },
     module: {
-        loaders: [
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader', 
-                query: {
-                    presets: ['es2015', 'react']
-                }
-            }
-        ]
-    }
-}
-module.exports = config; 
+      rules: [
+        {
+          test: /\.(jsx|js)?$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/,
+          query: {
+            presets: ['env', 'react'],
+          },
+        },
+        {
+          test: /.css$/,
+          use: ['style-loader', 'css-loader'],
+        },
+      ],
+    },
+  };
+  module.exports = config;
+  
