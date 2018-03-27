@@ -1,10 +1,10 @@
 let mongoose = require("mongoose");
-let Schema = mongoose.Schmea;
+let Schema = mongoose.Schema;
 
 let departmentSchema = new Schema({
     departmentName: String,
     departmentPercentAllocation: Number,
-    transactionHistory: [{type: Schema.Types.ObjectId, ref: "Transaction"}]
+    transactionHistory: [{type: mongoose.Schema.Types.ObjectId, ref: "Transaction"}]
 });
 
 module.exports = mongoose.model("Department", departmentSchema); 

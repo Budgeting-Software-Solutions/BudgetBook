@@ -1,5 +1,6 @@
-let mongoose = require("mongoose");
-let Schema = mongoose.Schema; 
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema; 
+
 
 let companySchema = new Schema({
     companyName: String,

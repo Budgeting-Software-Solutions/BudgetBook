@@ -1,13 +1,29 @@
-// let express = require("express");
-// let port = 3000; 
-// let path = require("path");
+const express = require("express");
+const port = 3000; 
+const path = require("path");
+const app = express();
 
-// let app = express();
+const dbController = require('./db/dbController');
 
-// app.get("/", (req,res)=>{
-//     res.sendFile(path.join(__dirname, "./index.html"));
-// });
+const mongoose = require('mongoose');
+const mongoURI = 'mongodb://budgetbook:budgetbook@ds125469.mlab.com:25469/budgetbook'; 
+const URI = process.env.MONGO_URI || mongoURI;
 
-// app.listen(port, ()=>{
-//     console.log(port); 
-// });
+mongoose.connect(mongoURI);
+
+mongoose.connection.once('open', () => {
+    console.log('connected to mongoDB for BudgetBook')
+})
+
+
+app.get("/", (req,res)=>{
+    res.sendFile(path.join(__dirname, "./index.html"));
+});
+
+// controllers...
+
+app.listen(port, ()=> console.log(`Server is listening on port ${port}`));
+
+
+
+
