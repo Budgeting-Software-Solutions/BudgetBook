@@ -1,11 +1,7 @@
 let config = {
-    entry: './main.js', // entry point
+    entry: './src/main.js', // entry point
     output: {
       filename: 'public/bundle.js', // place where bundled app will be served
-    },
-    devServer: {
-      inline: true, // autorefresh
-      port: 3000, // development port server
     },
     module: {
       rules: [

@@ -5,8 +5,33 @@ import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import { Link } from "react-router-dom";
 import Department from "./Department";
+import actionCreator from "../../redux/actionCreators.js";
+import {connect} from "react-redux"; 
+
+const mapStateToProps = (state) => ({
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    createCompany: (compName, compBudget) => {
+        console.log("creation.js/mapDispatchToProps/createCompany");
+        dispatch(actionCreator.addCompany(compName, compBudget));
+    }
+})
 
 class Creation extends Component {
+    constructor(){
+        super();
+        this.onClickAddCompany = this.onClickAddCompany.bind(this); 
+    }
+
+    onClickAddCompany(){
+        console.log("onClickAddCompany");
+        let companyName = document.getElementById("companyName").value;
+        let companyBudget = document.getElementById("companyBudget").value;
+        this.props.createCompany(companyName, companyBudget);
+    }
+
     render() {
       return (
       <div>
@@ -26,16 +51,18 @@ class Creation extends Component {
             <CardTitle title="Add Company"/>
             <CardActions>
               <TextField
+              id = "companyName"
               hintText="Apple"
               floatingLabelText="Company Name"
               floatingLabelFixed={true}
               />
               <TextField
+              id = "companyBudget"
               hintText="$5,000,000,000"
               floatingLabelText="Company Budget"
               floatingLabelFixed={true}
               />
-              <FlatButton label="Add Company" />
+              <FlatButton onClick = {this.onClickAddCompany} label="Add Company" />
             </CardActions>
         </Card>
         <Card>
@@ -65,4 +92,5 @@ class Creation extends Component {
       )
     }
   }
-export default Creation;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Creation);

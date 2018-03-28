@@ -20,7 +20,7 @@ const Home = () => {
     }
     />
     <TextField
-    hintText="The hint text can be as long as you want, it will wrap."
+    hintText="HELLOOLLLLLLLLO."
     />
   </div>
   )
