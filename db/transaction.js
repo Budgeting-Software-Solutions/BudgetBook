@@ -1,5 +1,5 @@
 let mongoose = require("mongoose");
-let Schema = mongoose.Schmea;
+let Schema = mongoose.Schema;
 
 let transactionSchema = new Schema({
     itemName: String,
