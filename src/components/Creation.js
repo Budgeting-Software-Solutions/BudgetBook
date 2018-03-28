@@ -7,18 +7,7 @@ import { Link } from "react-router-dom";
 import Department from "./Department";
 
 class Creation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      numberofDept: 0  
-    }
-    this.addNewDepartment = this.addNewDepartment.bind(this);
-  }
-  addNewDepartment() {
-    this.set
-  }
     render() {
-      // for (let i = 0; i < )
       return (
       <div>
         <AppBar
