@@ -18,7 +18,7 @@ class Creation extends Component {
     this.set
   }
     render() {
-      for (let i = 0; i < )
+      // for (let i = 0; i < )
       return (
       <div>
         <AppBar
