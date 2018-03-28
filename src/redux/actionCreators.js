@@ -4,8 +4,8 @@ function addCompany(companyName, companyBudget){
     return {type: ACTION_TYPES.ADD_COMPANY, companyName: companyName, companyBudget: companyBudget};
 }
 
-function addDepartment(departmentName, deptPercentage){
-    return {type: ACTION_TYPES.ADD_DEPARTMENT, departmentName: departmentName, deptPercentage: deptPercentage};
+function addDepartment(departmentName, departmentBudget){
+    return {type: ACTION_TYPES.ADD_DEPARTMENT, departmentName: departmentName, departmentBudget: departmentBudget};
 }
 
 export default {

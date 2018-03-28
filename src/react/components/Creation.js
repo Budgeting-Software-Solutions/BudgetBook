@@ -16,13 +16,19 @@ const mapDispatchToProps = (dispatch) => ({
     createCompany: (compName, compBudget) => {
         console.log("creation.js/mapDispatchToProps/createCompany");
         dispatch(actionCreator.addCompany(compName, compBudget));
-    }
+    },
+    createDepartment: (deptName, deptBudget) => {
+      console.log("!!!!!!!!deptBudget", deptBudget);
+      dispatch(actionCreator.addDepartment(deptName, deptBudget));
+  }
 })
 
 class Creation extends Component {
     constructor(){
         super();
         this.onClickAddCompany = this.onClickAddCompany.bind(this); 
+        this.onClickAddDepartment = this.onClickAddDepartment.bind(this); 
+
     }
 
     onClickAddCompany(){
@@ -31,6 +37,15 @@ class Creation extends Component {
         let companyBudget = document.getElementById("companyBudget").value;
         this.props.createCompany(companyName, companyBudget);
     }
+
+    onClickAddDepartment(){
+      console.log("onClickAddDept");
+      let departmentName = document.getElementById("departmentName").value;
+      let departmentBudget = document.getElementById("departmentBudget").value;
+      console.log("-----department name:", departmentName);
+      console.log("-----department budget:", departmentBudget);
+      this.props.createDepartment(departmentName, departmentBudget);
+  }
 
     render() {
       return (
@@ -65,29 +80,25 @@ class Creation extends Component {
               <FlatButton onClick = {this.onClickAddCompany} label="Add Company" />
             </CardActions>
         </Card>
-        <Card>
-          <CardTitle title="Add Additonal Departments"/>
-          <FlatButton label="Department +1" onClick={this.addNewDepartment} />
-        </Card>
+      
         <Card> 
           <CardTitle title="Add Department"/>
           <CardActions>
             <TextField
+            id = "departmentName"
             hintText="iPhone"
             floatingLabelText="Company Name"
             floatingLabelFixed={true}
             />
             <TextField
+            id = "departmentBudget"
             hintText="$2,000,000,000"
             floatingLabelText="Company Budget"
             floatingLabelFixed={true}
             />
-            <FlatButton label="Add Department" />
+            <FlatButton label="Add Department" onClick = {this.onClickAddDepartment} />
           </CardActions>
         </Card>
-        {/* <div>
-          {DepartmentList}
-        </div>   */}
       </div>
       )
     }
