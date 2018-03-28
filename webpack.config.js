@@ -1,7 +1,7 @@
 let config = {
     entry: './main.js', // entry point
     output: {
-      filename: 'index.js', // place where bundled app will be served
+      filename: 'public/bundle.js', // place where bundled app will be served
     },
     devServer: {
       inline: true, // autorefresh

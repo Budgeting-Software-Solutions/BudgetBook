@@ -15,6 +15,7 @@ mongoose.connection.once('open', () => {
     console.log('connected to mongoDB for BudgetBook')
 })
 
+app.use(express.static('public')); 
 
 app.get("/", (req,res)=>{
     res.sendFile(path.join(__dirname, "./index.html"));
