@@ -43,6 +43,7 @@ class Home extends Component {
       console.log("AMOUNT", amount);
       console.log("TARGET", target);  
       this.props.addTransaction(target, parseInt(amount));
+      document.getElementById("addTransaction").value = "";
   }
 
   render() {
