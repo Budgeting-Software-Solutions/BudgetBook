@@ -41,14 +41,14 @@ class Home extends Component {
     })
     console.log('NOOOOO', departmentListName);
     console.log('WHYYYYYYY', departmentListBudget);
-    
-
     // determines how many blue lines...
     for (var i = 0; i < departmentListName.length; i++) {
       lineData.push(parseInt(departmentListBudget[i]));
       barData.push(parseInt(departmentListBudget[i]) - 500)
       category.push(departmentListName[i]);
     }
+
+    
     let option = {
       backgroundColor: '#0f375f',
       tooltip: {
