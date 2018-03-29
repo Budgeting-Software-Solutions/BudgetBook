@@ -66,12 +66,12 @@ class Creation extends Component {
             floatingLabelText="Category Name"
             floatingLabelFixed={true}
             />
-            <TextField
+            {/* <TextField
             id = "departmentBudget"
             hintText="$800"
             floatingLabelText="Total Budget"
             floatingLabelFixed={true}
-            />
+            /> */}
             <RaisedButton 
             label="Add Category" 
             primary={true} 
