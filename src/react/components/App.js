@@ -4,7 +4,7 @@ import Home from './Home'
 import Creation from './Creation'
 
 const App = () => {
-  console.log("INside App in app.js");
+  // console.log("INside App in app.js");
   return ( 
     <Router>
       <div>
