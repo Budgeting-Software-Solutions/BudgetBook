@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardActions, CardTitle} from 'material-ui/Card';
 import DropDownMenu from 'material-ui/DropDownMenu';
@@ -48,7 +47,7 @@ class Home extends Component {
       category.push(departmentListName[i]);
     }
 
-    
+
     let option = {
       backgroundColor: '#0f375f',
       tooltip: {
@@ -131,12 +130,12 @@ class Home extends Component {
           <AppBar
           iconElementLeft={
           <div>
-              <Link to="/creation">    
-              <FlatButton label="Create" />
-              </Link>
-              <Link to="/">
-              <FlatButton label="Home" />
-              </Link>
+            <Link to="/creation">    
+              <RaisedButton label="Create" primary={true} />
+            </Link>
+            <Link to="/">
+              <RaisedButton label="Home" primary={true} />
+            </Link>
           </div>
           }
           />
@@ -165,12 +164,12 @@ class Home extends Component {
             <CardActions>
               <TextField
               id = "addTransaction"
-              hintText="$100,000,000"
+              hintText="$100,000,000 or -$100,000,000"
               floatingLabelText="Transaction"
               floatingLabelFixed={true}
               />
               <RaisedButton 
-              label="Add Company" 
+              label="Add/Subtract Transaction" 
               primary={true} 
               style={{margin: 12}}/>
             </CardActions>
