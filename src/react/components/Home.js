@@ -1,17 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux'
 import ReactEcharts from 'echarts-for-react';
-// Generate data
+
+
+ 
+class Home extends Component {
+  constructor(props) {
+      super(props);
+  }
+  render() {
+    // Generate data
 var category = [];
 var dottedBase = +new Date();
 var lineData = [];
 var barData = [];
 
 // determines how many blue lines...
-let department = [['tech'], ['sales']];
+let department = [[this.props.companyName]];
 for (var i = 0; i < department.length; i++) {
     // var date = new Date(dottedBase += 3600 * 24 * 1000);
     category.push(
@@ -103,29 +112,36 @@ var option = {
       data: lineData
   }]
 };
- 
-const Home = () => {
-  return (
-  <div>
-    <AppBar
-    iconElementLeft={
-      <div>
-        <Link to="/creation">    
-          <FlatButton label="Create" />
-        </Link>
-        <Link to="/">
-          <FlatButton label="Home" />
-        </Link>
-      </div>
-    }
-    />
-    <ReactEcharts 
-  option={option} 
-  style={{height: '400px', width: '100%'}}  
-  opts={{renderer: 'svg'}}  
-  className='react_for_echarts' />
-  </div>
-  )
+    console.log('FUCKKKKKKKK', this.props.companyName)
+    return (
+    <div>
+        <AppBar
+        iconElementLeft={
+        <div>
+            <Link to="/creation">    
+            <FlatButton label="Create" />
+            </Link>
+            <Link to="/">
+            <FlatButton label="Home" />
+            </Link>
+        </div>
+        }
+        />
+        <ReactEcharts 
+        option={option} 
+        style={{height: '400px', width: '100%'}}  
+        opts={{renderer: 'svg'}}  
+        className='react_for_echarts' />
+    </div>
+    )
+  }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({   
+    companyName: state.companyName,
+    companyBudget: state.companyBudget
+})
+
+export default connect(
+    mapStateToProps,
+  )(Home)
