@@ -31,17 +31,8 @@ const mapDispatchToProps = (dispatch) => ({
 class Creation extends Component {
     constructor(){
         super();
-        this.onClickAddCompany = this.onClickAddCompany.bind(this); 
         this.onClickAddDepartment = this.onClickAddDepartment.bind(this); 
     }
-
-    onClickAddCompany(){
-        // console.log("onClickAddCompany");
-        let companyName = document.getElementById("companyName").value;
-        let companyBudget = document.getElementById("companyBudget").value;
-        this.props.createCompany(companyName, companyBudget);
-    }
-
     onClickAddDepartment(){
       // console.log("onClickAddDept");
       let departmentName = document.getElementById("departmentName").value;
@@ -50,7 +41,6 @@ class Creation extends Component {
       // console.log("-----department budget:", departmentBudget);
       this.props.addDepartment(departmentName);
   }
-
     render() {
       return (
       <div>
@@ -65,47 +55,25 @@ class Creation extends Component {
             </Link>
           </div>
         }
+        title="Budget Book"
         />
-        {/* <Card> 
-            <CardTitle title="Add Company"/>
-            <CardActions>
-              <TextField
-              id = "companyName"
-              hintText="Apple"
-              floatingLabelText="Company Name"
-              floatingLabelFixed={true}
-              />
-              <TextField
-              id = "companyBudget"
-              hintText="$5,000,000,000"
-              floatingLabelText="Company Budget"
-              floatingLabelFixed={true}
-              />
-              <RaisedButton 
-              label="Add Company" 
-              primary={true} 
-              style={{margin: 12}} 
-              onClick = {this.onClickAddCompany}/>
-            </CardActions>
-        </Card> */}
-      
         <Card> 
-          <CardTitle title="Add Department"/>
+          <CardTitle title="Add Category"/>
           <CardActions>
             <TextField
             id = "departmentName"
-            hintText="iPhone"
-            floatingLabelText="Company Name"
+            hintText="Gas Bill"
+            floatingLabelText="Category Name"
             floatingLabelFixed={true}
             />
-            {/* <TextField
+            <TextField
             id = "departmentBudget"
-            hintText="$2,000,000,000"
-            floatingLabelText="Company Budget"
+            hintText="$800"
+            floatingLabelText="Total Budget"
             floatingLabelFixed={true}
-            /> */}
+            />
             <RaisedButton 
-            label="Add Department" 
+            label="Add Category" 
             primary={true} 
             style={{margin: 12}}  
             onClick = {this.onClickAddDepartment}/>
