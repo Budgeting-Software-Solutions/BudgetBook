@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar';
+import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardTitle} from 'material-ui/Card';
 import { Link } from "react-router-dom";
 import Department from "./Department";
 import actionCreator from "../../redux/actionCreators.js";
@@ -16,11 +17,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     createCompany: (compName, compBudget) => {
-        console.log("creation.js/mapDispatchToProps/createCompany");
+        // console.log("creation.js/mapDispatchToProps/createCompany");
         dispatch(actionCreator.addCompany(compName, compBudget));
     },
     createDepartment: (deptName, deptBudget) => {
-      console.log("!!!!!!!!deptBudget", deptBudget);
+      // console.log("!!!!!!!!deptBudget", deptBudget);
       dispatch(actionCreator.addDepartment(deptName, deptBudget));
   }
 })
@@ -34,18 +35,18 @@ class Creation extends Component {
     }
 
     onClickAddCompany(){
-        console.log("onClickAddCompany");
+        // console.log("onClickAddCompany");
         let companyName = document.getElementById("companyName").value;
         let companyBudget = document.getElementById("companyBudget").value;
         this.props.createCompany(companyName, companyBudget);
     }
 
     onClickAddDepartment(){
-      console.log("onClickAddDept");
+      // console.log("onClickAddDept");
       let departmentName = document.getElementById("departmentName").value;
       let departmentBudget = document.getElementById("departmentBudget").value;
-      console.log("-----department name:", departmentName);
-      console.log("-----department budget:", departmentBudget);
+      // console.log("-----department name:", departmentName);
+      // console.log("-----department budget:", departmentBudget);
       this.props.createDepartment(departmentName, departmentBudget);
   }
 
@@ -79,7 +80,11 @@ class Creation extends Component {
               floatingLabelText="Company Budget"
               floatingLabelFixed={true}
               />
-              <FlatButton onClick = {this.onClickAddCompany} label="Add Company" />
+              <RaisedButton 
+              label="Add Company" 
+              primary={true} 
+              style={{margin: 12}} 
+              onClick = {this.onClickAddCompany}/>
             </CardActions>
         </Card>
       
@@ -98,7 +103,11 @@ class Creation extends Component {
             floatingLabelText="Company Budget"
             floatingLabelFixed={true}
             />
-            <FlatButton label="Add Department" onClick = {this.onClickAddDepartment} />
+            <RaisedButton 
+            label="Add Department" 
+            primary={true} 
+            style={{margin: 12}}  
+            onClick = {this.onClickAddDepartment}/>
           </CardActions>
         </Card>
       </div>
