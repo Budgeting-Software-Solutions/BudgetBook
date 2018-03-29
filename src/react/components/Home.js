@@ -188,12 +188,12 @@ class Home extends Component {
               </CardActions>
             </Card>
             <CardActions>
-              {/* <TextField
+              <TextField
               id = "addTransaction"
               hintText="$100 or -$100"
               floatingLabelText="Expense"
               floatingLabelFixed={true}
-              /> */}
+              />
               <RaisedButton 
               label="Add/Subtract Expense" 
               primary={true} 
