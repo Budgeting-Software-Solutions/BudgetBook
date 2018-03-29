@@ -14,7 +14,7 @@ const Reducer = (state = initialState, action) => {
         case ACTION_TYPE.ADD_COMPANY: {
             return Object.assign({}, state, {
                 companyName: action.companyName,
-                budget: action.companyBudget
+                companyBudget: action.companyBudget
             });
         }
         case ACTION_TYPE.ADD_DEPARTMENT: {
