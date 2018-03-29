@@ -8,8 +8,10 @@ import Department from "./Department";
 import actionCreator from "../../redux/actionCreators.js";
 import {connect} from "react-redux"; 
 
-const mapStateToProps = (state) => ({
-
+const mapStateToProps = (state) => ({   
+  companyName: state.companyName,
+  companyBudget: state.companyBudget,
+  department: state.department
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -104,4 +106,4 @@ class Creation extends Component {
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Creation);
+export default connect(mapStateToProps,mapDispatchToProps)(Creation);
