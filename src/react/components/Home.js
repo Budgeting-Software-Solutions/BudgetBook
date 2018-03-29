@@ -11,35 +11,30 @@ import ReactEcharts from 'echarts-for-react';
 import actionCreator from "../../redux/actionCreators.js";
 
 const mapStateToProps = (state) => {
-    console.log(state);
-    return {   
-    // companyName: state.companyName,
-    // companyBudget: state.companyBudget,  
-    departmentList: Object.keys(state),
-    state: state
+  console.log(state);
+  return {    
+  departmentList: Object.keys(state),
+  state: state
 }};
 
 const mapDispatchToProps = (dispatch) => ({
-    
-    addTransaction: (deptName, transaction) => {
-      dispatch(actionCreator.addTransaction(deptName, transaction));
-    }
-
+  addTransaction: (deptName, transaction) => {
+    dispatch(actionCreator.addTransaction(deptName, transaction));
+  }
 }); 
 
 class Home extends Component {
   constructor() {
-      super();
-      this.state= {
-        value: 0
-      }
+    super();
+    this.state= {
+      value: 0
+    }
   this.handleChange = this.handleChange.bind(this);
   this.addSub = this.addSub.bind(this);
   }
 
   handleChange(event, index, value) {
       this.setState({value})
-      
   };
   
   addSub(){
@@ -51,17 +46,16 @@ class Home extends Component {
   }
 
   render() {
-    // Generate data
     let result = this.props.departmentList.map(function(el){
         return [el]; 
     });
     let listTotalTransaction = []; 
     for (let category in this.props.state){
-        listTotalTransaction.push(
-            this.props.state[category].reduce((acc, cv)=>{
-                return acc+=cv; 
-            }, 0) 
-        );
+      listTotalTransaction.push(
+        this.props.state[category].reduce((acc, cv)=>{
+          return acc+=cv; 
+        }, 0) 
+      );
     };
     console.log("!!!!!!!!!!!!",listTotalTransaction);
     let category = [];
@@ -76,13 +70,9 @@ class Home extends Component {
     //   return ele.departmentBudget;
     // })
     let departmentDropDownList = []
-    //console.log("DepartmentDropDownList!!!!!!!!!",departmentDropDownList);
-    // console.log('NOOOOO', departmentListName);
-    // console.log('WHYYYYYYY', departmentListBudget);
-    // determines how many blue lines...
     console.log("departmentList!!!!!!!!",this.props.departmentList);
     for (let i = 0; i < this.props.departmentList.length; i++) {
-      //lineData.push(parseInt(departmentListBudget[i]));
+    //   lineData.push(parseInt(departmentListBudget[i]));
       barData.push(parseInt(listTotalTransaction[i]));
       category.push(result[i]);
       departmentDropDownList.push(<MenuItem key={i} value={i} primaryText={this.props.departmentList[i]}/>)
@@ -177,14 +167,15 @@ class Home extends Component {
             </Link>
           </div>
           }
+          title="Budget Book"
           />
-        <ReactEcharts 
-        option={option} 
-        style={{height: '400px', width: '100%'}}  
-        opts={{renderer: 'svg'}}  
-        className='react_for_echarts' />
+          <ReactEcharts 
+          option={option} 
+          style={{height: '400px', width: '100%'}}  
+          opts={{renderer: 'svg'}}  
+          className='react_for_echarts' />
         <Card> 
-          <CardTitle title="Add/Subtract Transaction"/>
+          <CardTitle title="Add/Subtract Expense"/>
             <Card>
               <CardActions>
                 <DropDownMenu 
@@ -197,14 +188,14 @@ class Home extends Component {
               </CardActions>
             </Card>
             <CardActions>
-              <TextField
+              {/* <TextField
               id = "addTransaction"
-              hintText="$100,000,000 or -$100,000,000"
-              floatingLabelText="Transaction"
+              hintText="$100 or -$100"
+              floatingLabelText="Expense"
               floatingLabelFixed={true}
-              />
+              /> */}
               <RaisedButton 
-              label="Add/Subtract Transaction" 
+              label="Add/Subtract Expense" 
               primary={true} 
               onClick = {this.addSub}
               style={{margin: 12}}/>
