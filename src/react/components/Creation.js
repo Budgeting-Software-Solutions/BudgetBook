@@ -40,7 +40,9 @@ class Creation extends Component {
       // console.log("-----department name:", departmentName);
       // console.log("-----department budget:", departmentBudget);
       this.props.addDepartment(departmentName);
+      document.getElementById("departmentName").value = "";
   }
+
     render() {
       return (
       <div>
