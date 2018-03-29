@@ -8,21 +8,24 @@ import Department from "./Department";
 import actionCreator from "../../redux/actionCreators.js";
 import {connect} from "react-redux"; 
 
-const mapStateToProps = (state) => ({   
-  companyName: state.companyName,
-  companyBudget: state.companyBudget,
-  department: state.department
+const mapStateToProps = (store) => ({   
+  // companyName: state.companyName,
+  // companyBudget: state.companyBudget,
+  department: store.category
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    createCompany: (compName, compBudget) => {
-        // console.log("creation.js/mapDispatchToProps/createCompany");
-        dispatch(actionCreator.addCompany(compName, compBudget));
-    },
-    createDepartment: (deptName, deptBudget) => {
+    // createCompany: (compName, compBudget) => {
+    //     // console.log("creation.js/mapDispatchToProps/createCompany");
+    //     dispatch(actionCreator.addCompany(compName, compBudget));
+    // },
+    addDepartment: (deptName) => {
       // console.log("!!!!!!!!deptBudget", deptBudget);
-      dispatch(actionCreator.addDepartment(deptName, deptBudget));
-  }
+      dispatch(actionCreator.addDepartment(deptName));
+    } 
+    // addTransaction: (deptName, transaction) => {
+    //   dispatch(actionCreator.addTransaction, transaction);
+    // }
 })
 
 class Creation extends Component {
@@ -42,10 +45,10 @@ class Creation extends Component {
     onClickAddDepartment(){
       // console.log("onClickAddDept");
       let departmentName = document.getElementById("departmentName").value;
-      let departmentBudget = document.getElementById("departmentBudget").value;
+      //let departmentBudget = document.getElementById("departmentBudget").value;
       // console.log("-----department name:", departmentName);
       // console.log("-----department budget:", departmentBudget);
-      this.props.createDepartment(departmentName, departmentBudget);
+      this.props.addDepartment(departmentName);
   }
 
     render() {
@@ -63,7 +66,7 @@ class Creation extends Component {
           </div>
         }
         />
-        <Card> 
+        {/* <Card> 
             <CardTitle title="Add Company"/>
             <CardActions>
               <TextField
@@ -84,7 +87,7 @@ class Creation extends Component {
               style={{margin: 12}} 
               onClick = {this.onClickAddCompany}/>
             </CardActions>
-        </Card>
+        </Card> */}
       
         <Card> 
           <CardTitle title="Add Department"/>
@@ -95,12 +98,12 @@ class Creation extends Component {
             floatingLabelText="Company Name"
             floatingLabelFixed={true}
             />
-            <TextField
+            {/* <TextField
             id = "departmentBudget"
             hintText="$2,000,000,000"
             floatingLabelText="Company Budget"
             floatingLabelFixed={true}
-            />
+            /> */}
             <RaisedButton 
             label="Add Department" 
             primary={true} 

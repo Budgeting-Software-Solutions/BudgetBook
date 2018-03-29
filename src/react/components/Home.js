@@ -14,7 +14,15 @@ const mapStateToProps = (state) => ({
     companyBudget: state.companyBudget,
     department: state.department
 })
- 
+
+const mapDispatchToProps = (dispatch) => ({
+    
+    addTransaction: (deptName, transaction) => {
+      dispatch(actionCreator.addTransaction(deptName, transaction));
+    }
+
+}); 
+
 class Home extends Component {
   constructor(props) {
       super(props);
