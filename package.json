@@ -17,6 +17,8 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.9",
+    "echarts": "^4.0.4",
+    "echarts-for-react": "^2.0.8",
     "material-ui": "^0.20.0",
     "mongoose": "^5.0.12",
     "react": "^16.2.0",
