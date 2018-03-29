@@ -6,9 +6,7 @@ import ACTION_TYPE from './actionTypes.js';
 //     department: []
 // };
 let initialState = {
-    category:{
-
-    }
+    
 }
 
 const Reducer = (state = initialState, action) => {
@@ -25,10 +23,13 @@ const Reducer = (state = initialState, action) => {
             // console.log('state.....', state);
             // console.log("inside reducer1",action.departmentName); 
             // console.log("inside reducer2",action);
-            return Object.assign({}, state, {
-                department: state.department.concat({departmentName: action.departmentName, departmentBudget: action.departmentBudget})
-            })
-           
+            let obj = Object.assign({}, state); 
+            // console.log("EXPECTING OBJ WITH 3 KEYS", obj);
+            console.log("Inside reducer/addtransaction!!!!!",action.transaction); 
+            // console.log("EXPECTING ARRAY",obj[action.deptName].push(action.transaction));
+            obj[action.deptName] = obj[action.deptName].concat([action.transaction]);
+            console.log("Inside reducer/addtransaction/OBJ!!!!!",obj);
+            return obj;
         }
         break;
         case ACTION_TYPE.ADD_DEPARTMENT: {

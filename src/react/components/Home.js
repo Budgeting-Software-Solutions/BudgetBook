@@ -6,14 +6,18 @@ import {Card, CardActions, CardTitle} from 'material-ui/Card';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import ReactEcharts from 'echarts-for-react';
+import actionCreator from "../../redux/actionCreators.js";
 
-const mapStateToProps = (state) => ({   
-    companyName: state.companyName,
-    companyBudget: state.companyBudget,
-    department: state.department
-})
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {   
+    // companyName: state.companyName,
+    // companyBudget: state.companyBudget,  
+    departmentList: Object.keys(state),
+    state: state
+}};
 
 const mapDispatchToProps = (dispatch) => ({
     
@@ -24,37 +28,64 @@ const mapDispatchToProps = (dispatch) => ({
 }); 
 
 class Home extends Component {
-  constructor(props) {
-      super(props);
+  constructor() {
+      super();
       this.state= {
-        value: 1
+        value: 0
       }
   this.handleChange = this.handleChange.bind(this);
+  this.addSub = this.addSub.bind(this);
   }
 
-  handleChange(event, index, value) {this.setState({value})};
+  handleChange(event, index, value) {
+      this.setState({value})
+      
+  };
+  
+  addSub(){
+      let amount = document.getElementById("addTransaction").value; 
+      let target = this.props.departmentList[this.state.value];
+      console.log("AMOUNT", amount);
+      console.log("TARGET", target);  
+      this.props.addTransaction(target, parseInt(amount));
+  }
 
   render() {
     // Generate data
-    let category = [[this.props.companyName]];
+    let result = this.props.departmentList.map(function(el){
+        return [el]; 
+    });
+    let listTotalTransaction = []; 
+    for (let category in this.props.state){
+        listTotalTransaction.push(
+            this.props.state[category].reduce((acc, cv)=>{
+                return acc+=cv; 
+            }, 0) 
+        );
+    };
+    console.log("!!!!!!!!!!!!",listTotalTransaction);
+    let category = [];
     let dottedBase = +new Date();
     let lineData = [parseInt(this.props.companyBudget)];
     let barData = [];
-    let departmentListName = this.props.department.map(ele => {
-      return [ele.departmentName];
-    })
-    let departmentListBudget = this.props.department.map(ele => {
-      return ele.departmentBudget;
-    })
-    let departmentDropDownList = [<MenuItem value={0} primaryText={this.props.companyName}/>]
-    console.log('NOOOOO', departmentListName);
-    console.log('WHYYYYYYY', departmentListBudget);
+    // let departmentListName = this.props.department.map(ele => {
+    //   return [ele];
+    // })
+    //console.log("DepartmentListName!!!!!",departmentListName);
+    // let departmentListBudget = this.props.department.map(ele => {
+    //   return ele.departmentBudget;
+    // })
+    let departmentDropDownList = []
+    //console.log("DepartmentDropDownList!!!!!!!!!",departmentDropDownList);
+    // console.log('NOOOOO', departmentListName);
+    // console.log('WHYYYYYYY', departmentListBudget);
     // determines how many blue lines...
-    for (let i = 0; i < departmentListName.length; i++) {
-      lineData.push(parseInt(departmentListBudget[i]));
-      // barData.push(parseInt(departmentListBudget[i]) - 500)
-      category.push(departmentListName[i]);
-      departmentDropDownList.push(<MenuItem value={i} primaryText={departmentListName[i]}/>)
+    console.log("departmentList!!!!!!!!",this.props.departmentList);
+    for (let i = 0; i < this.props.departmentList.length; i++) {
+      //lineData.push(parseInt(departmentListBudget[i]));
+      barData.push(parseInt(listTotalTransaction[i]));
+      category.push(result[i]);
+      departmentDropDownList.push(<MenuItem key={i} value={i} primaryText={this.props.departmentList[i]}/>)
     }
     let option = {
       backgroundColor: '#0f375f',
@@ -175,6 +206,7 @@ class Home extends Component {
               <RaisedButton 
               label="Add/Subtract Transaction" 
               primary={true} 
+              onClick = {this.addSub}
               style={{margin: 12}}/>
             </CardActions>
         </Card>
@@ -185,6 +217,4 @@ class Home extends Component {
 
 
 
-export default connect(
-    mapStateToProps,
-  )(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
