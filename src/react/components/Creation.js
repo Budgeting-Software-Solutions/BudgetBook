@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardTitle} from 'material-ui/Card';
 import { Link } from "react-router-dom";
 import Department from "./Department";
@@ -57,10 +56,10 @@ class Creation extends Component {
         iconElementLeft={
           <div>
             <Link to="/creation">    
-              <FlatButton label="Create" />
+              <RaisedButton label="Create" primary={true} />
             </Link>
             <Link to="/">
-              <FlatButton label="Home" />
+              <RaisedButton label="Home" primary={true} />
             </Link>
           </div>
         }
