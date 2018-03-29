@@ -31,23 +31,23 @@ class Home extends Component {
     let category = [[this.props.companyName]];
     let dottedBase = +new Date();
     let lineData = [parseInt(this.props.companyBudget)];
-    let barData = [parseInt(this.props.companyBudget)];
+    let barData = [];
     let departmentListName = this.props.department.map(ele => {
       return [ele.departmentName];
     })
     let departmentListBudget = this.props.department.map(ele => {
       return ele.departmentBudget;
     })
+    let departmentDropDownList = [<MenuItem value={0} primaryText={this.props.companyName}/>]
     console.log('NOOOOO', departmentListName);
     console.log('WHYYYYYYY', departmentListBudget);
     // determines how many blue lines...
-    for (var i = 0; i < departmentListName.length; i++) {
+    for (let i = 0; i < departmentListName.length; i++) {
       lineData.push(parseInt(departmentListBudget[i]));
-      barData.push(parseInt(departmentListBudget[i]) - 500)
+      // barData.push(parseInt(departmentListBudget[i]) - 500)
       category.push(departmentListName[i]);
+      departmentDropDownList.push(<MenuItem value={i} primaryText={departmentListName[i]}/>)
     }
-
-
     let option = {
       backgroundColor: '#0f375f',
       tooltip: {
@@ -153,11 +153,7 @@ class Home extends Component {
                   autoWidth={false}
                   value={this.state.value} 
                   onChange={this.handleChange}>
-                  <MenuItem value={1} primaryText="Never" />
-                  <MenuItem value={2} primaryText="Every Night" />
-                  <MenuItem value={3} primaryText="Weeknights" />
-                  <MenuItem value={4} primaryText="Weekends" />
-                  <MenuItem value={5} primaryText="Weekly" />
+                {departmentDropDownList}
                 </DropDownMenu>
               </CardActions>
             </Card>
