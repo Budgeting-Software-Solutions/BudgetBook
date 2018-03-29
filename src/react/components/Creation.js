@@ -8,8 +8,8 @@ import Department from "./Department";
 import actionCreator from "../../redux/actionCreators.js";
 import {connect} from "react-redux"; 
 
-const mapStateToProps = (state) => ({
-
+const mapStateToProps = (store) => ({
+    
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -28,7 +28,6 @@ class Creation extends Component {
         super();
         this.onClickAddCompany = this.onClickAddCompany.bind(this); 
         this.onClickAddDepartment = this.onClickAddDepartment.bind(this); 
-
     }
 
     onClickAddCompany(){
