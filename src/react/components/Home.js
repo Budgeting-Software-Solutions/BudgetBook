@@ -39,11 +39,19 @@ class Home extends Component {
   
   addSub(){
       let amount = document.getElementById("addTransaction").value; 
+      // trim white spaces 
+      let trimmedAmount = amount.trim(); 
       let target = this.props.departmentList[this.state.value];
       // console.log("AMOUNT", amount);
       // console.log("TARGET", target);  
-      this.props.addTransaction(target, parseInt(amount));
+      var regexp = /[A-Z!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/gi;
+      var matches_array = trimmedAmount.match(regexp);
+      // if there are non numeric characters in the string, we will not be running the addTransaction function
+      if(matches_array === null){
+        this.props.addTransaction(target, parseInt(trimmedAmount));
+      }
       document.getElementById("addTransaction").value = "";
+      return;
   }
 
   render() {
