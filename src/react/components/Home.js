@@ -46,7 +46,7 @@ class Home extends Component {
       // console.log("TARGET", target);  
       var regexp = /[A-Z!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/gi;
       var matches_array = trimmedAmount.match(regexp);
-      // if there is not characters in the string, matches_array will return null
+      // if there are non numeric characters in the string, we will not be running the addTransaction function
       if(matches_array === null){
         this.props.addTransaction(target, parseInt(trimmedAmount));
       }
