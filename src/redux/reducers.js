@@ -25,19 +25,27 @@ const Reducer = (state = initialState, action) => {
             // console.log("inside reducer2",action);
             let obj = Object.assign({}, state); 
             // console.log("EXPECTING OBJ WITH 3 KEYS", obj);
-            console.log("Inside reducer/addtransaction!!!!!",action.transaction); 
+            //console.log("Inside reducer/addtransaction!!!!!",action.transaction); 
             // console.log("EXPECTING ARRAY",obj[action.deptName].push(action.transaction));
-            obj[action.deptName] = obj[action.deptName].concat([action.transaction]);
+            obj[action.deptName] = {
+                spendingLimit: obj[action.deptName].spendingLimit,
+                transactions: obj[action.deptName].transactions.concat([action.transactions])
+            }
             console.log("Inside reducer/addtransaction/OBJ!!!!!",obj);
             return obj;
         }
         break;
+
         case ACTION_TYPE.ADD_DEPARTMENT: {
             // console.log('state.....', state);
             // console.log("inside reducer1",action.departmentName); 
             // console.log("inside reducer2",action);
+            //console.log("SPENDING LIMIT:", action);
             let obj = Object.assign({}, state);
-            obj[action.departmentName] = []; 
+            obj[action.departmentName] = {
+                spendingLimit: action.spendingLimit,
+                transactions: []
+            }
             return obj;
         }
         break; 

@@ -19,9 +19,9 @@ const mapDispatchToProps = (dispatch) => ({
     //     // console.log("creation.js/mapDispatchToProps/createCompany");
     //     dispatch(actionCreator.addCompany(compName, compBudget));
     // },
-    addDepartment: (deptName) => {
+    addDepartment: (deptName, spendingLimit) => {
       // console.log("!!!!!!!!deptBudget", deptBudget);
-      dispatch(actionCreator.addDepartment(deptName));
+      dispatch(actionCreator.addDepartment(deptName, spendingLimit));
     } 
     // addTransaction: (deptName, transaction) => {
     //   dispatch(actionCreator.addTransaction, transaction);
@@ -36,11 +36,13 @@ class Creation extends Component {
     onClickAddDepartment(){
       // console.log("onClickAddDept");
       let departmentName = document.getElementById("departmentName").value;
-      //let departmentBudget = document.getElementById("departmentBudget").value;
+      let spendingLimit = document.getElementById("spendingLimit").value;
+      console.log("SPENDING LIMIT INSIDE onClickAddDepartment", spendingLimit); 
       // console.log("-----department name:", departmentName);
       // console.log("-----department budget:", departmentBudget);
-      this.props.addDepartment(departmentName);
+      this.props.addDepartment(departmentName, parseInt(spendingLimit));
       document.getElementById("departmentName").value = "";
+      document.getElementById("spendingLimit").value = "";
   }
 
     render() {
@@ -68,12 +70,12 @@ class Creation extends Component {
             floatingLabelText="Category Name"
             floatingLabelFixed={true}
             />
-            {/* <TextField
-            id = "departmentBudget"
+             <TextField
+            id = "spendingLimit"
             hintText="$800"
-            floatingLabelText="Total Budget"
+            floatingLabelText="Spending Limit"
             floatingLabelFixed={true}
-            /> */}
+            /> 
             <RaisedButton 
             label="Add Category" 
             primary={true} 
