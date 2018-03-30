@@ -11,7 +11,7 @@ import ReactEcharts from 'echarts-for-react';
 import actionCreator from "../../redux/actionCreators.js";
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  //console.log(state);
   return {    
   departmentList: Object.keys(state),
   state: state
@@ -40,8 +40,8 @@ class Home extends Component {
   addSub(){
       let amount = document.getElementById("addTransaction").value; 
       let target = this.props.departmentList[this.state.value];
-      console.log("AMOUNT", amount);
-      console.log("TARGET", target);  
+      // console.log("AMOUNT", amount);
+      // console.log("TARGET", target);  
       this.props.addTransaction(target, parseInt(amount));
       document.getElementById("addTransaction").value = "";
   }
@@ -51,17 +51,22 @@ class Home extends Component {
         return [el]; 
     });
     let listTotalTransaction = []; 
+    let listOfSpendingLimits = [];
     for (let category in this.props.state){
+      
       listTotalTransaction.push(
-        this.props.state[category].reduce((acc, cv)=>{
+        this.props.state[category].transactions.reduce((acc, cv)=>{
           return acc+=cv; 
         }, 0) 
       );
+      // pushing in each category's spending limit
+      listOfSpendingLimits.push(this.props.state[category].spendingLimit);
     };
-    console.log("!!!!!!!!!!!!",listTotalTransaction);
+    console.log("LISTOFSPENDINGLIMITS", listOfSpendingLimits);
+    //console.log("!!!!!!!!!!!!",listTotalTransaction);
     let category = [];
     let dottedBase = +new Date();
-    let lineData = [parseInt(this.props.companyBudget)];
+    let lineData = [];
     let barData = [];
     // let departmentListName = this.props.department.map(ele => {
     //   return [ele];
@@ -73,7 +78,7 @@ class Home extends Component {
     let departmentDropDownList = []
     console.log("departmentList!!!!!!!!",this.props.departmentList);
     for (let i = 0; i < this.props.departmentList.length; i++) {
-    //   lineData.push(parseInt(departmentListBudget[i]));
+      lineData.push(parseInt(listOfSpendingLimits[i]));
       barData.push(parseInt(listTotalTransaction[i]));
       category.push(result[i]);
       departmentDropDownList.push(<MenuItem key={i} value={i} primaryText={this.props.departmentList[i]}/>)
@@ -109,6 +114,14 @@ class Home extends Component {
           }
       },
       series: [{
+        name: 'line',
+        type: 'line',
+        smooth: true,
+        showAllSymbol: true,
+        symbol: 'emptyCircle',
+        symbolSize: 15,
+        data: lineData
+    },{
           name: 'bar',
           type: 'bar',
           barWidth: 10,
@@ -119,7 +132,30 @@ class Home extends Component {
               }
           },
           data: barData
-      }]
+      }, {
+        name: 'dotted',
+        type: 'pictorialBar',
+        symbol: 'rect',
+        itemStyle: {
+            normal: {
+                color: '#0f375f'
+            }
+        }
+      },{
+        name: 'dotted',
+        type: 'pictorialBar',
+        symbol: 'rect',
+        itemStyle: {
+            normal: {
+                color: '#f44250'
+            }
+        },
+        symbolRepeat: true,
+        symbolSize: [12, 4],
+        symbolMargin: 1,
+        z: -10,
+        data: lineData
+    }]
     };
       return (
         <div>
