@@ -12,9 +12,10 @@ import actionCreator from "../../redux/actionCreators.js";
 
 const mapStateToProps = (state) => {
   return {    
-  departmentList: Object.keys(state),
+  departmentList: ["TotalBudget"].concat(Object.keys(state)),
   state: state
-}};
+  } 
+};
 
 const mapDispatchToProps = (dispatch) => ({
   addTransaction: (deptName, transaction) => {
@@ -53,15 +54,19 @@ class Home extends Component {
     let result = this.props.departmentList.map(function(el){
         return [el]; 
     });
+    let totalTransaction = 0;
+    let totalSpending = 0; 
     let listTotalTransaction = []; 
     let listOfSpendingLimits = [];
     for (let category in this.props.state){
       listTotalTransaction.push(
         this.props.state[category].transactions.reduce((acc, cv)=>{
+          totalTransaction += cv;
           return acc+=cv; 
         }, 0) 
       );
       listOfSpendingLimits.push(this.props.state[category].spendingLimit);
+      totalSpending += this.props.state[category].spendingLimit;
     };
     let category = [];
     let dottedBase = +new Date();
@@ -148,6 +153,7 @@ class Home extends Component {
         data: lineData
     }]
     };
+    let slicedDeptDropDownList = departmentDropDownList.slice(1); 
       return (
         <div>
           <AppBar
@@ -177,7 +183,7 @@ class Home extends Component {
                   autoWidth={false}
                   value={this.state.value} 
                   onChange={this.handleChange}>
-                {departmentDropDownList}
+                {slicedDeptDropDownList}
                 </DropDownMenu>
               </CardActions>
             </Card>
