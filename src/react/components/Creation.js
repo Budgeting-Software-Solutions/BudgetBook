@@ -9,23 +9,13 @@ import actionCreator from "../../redux/actionCreators.js";
 import {connect} from "react-redux"; 
 
 const mapStateToProps = (store) => ({   
-  // companyName: state.companyName,
-  // companyBudget: state.companyBudget,
   department: store.category
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    // createCompany: (compName, compBudget) => {
-    //     // console.log("creation.js/mapDispatchToProps/createCompany");
-    //     dispatch(actionCreator.addCompany(compName, compBudget));
-    // },
     addDepartment: (deptName, spendingLimit) => {
-      // console.log("!!!!!!!!deptBudget", deptBudget);
       dispatch(actionCreator.addDepartment(deptName, spendingLimit));
     } 
-    // addTransaction: (deptName, transaction) => {
-    //   dispatch(actionCreator.addTransaction, transaction);
-    // }
 })
 
 class Creation extends Component {
@@ -34,12 +24,9 @@ class Creation extends Component {
         this.onClickAddDepartment = this.onClickAddDepartment.bind(this); 
     }
     onClickAddDepartment(){
-      // console.log("onClickAddDept");
       let departmentName = document.getElementById("departmentName").value;
       let spendingLimit = document.getElementById("spendingLimit").value;
       console.log("SPENDING LIMIT INSIDE onClickAddDepartment", spendingLimit); 
-      // console.log("-----department name:", departmentName);
-      // console.log("-----department budget:", departmentBudget);
       this.props.addDepartment(departmentName, parseInt(spendingLimit));
       document.getElementById("departmentName").value = "";
       document.getElementById("spendingLimit").value = "";
