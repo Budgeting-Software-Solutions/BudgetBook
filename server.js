@@ -12,7 +12,7 @@ const URI = process.env.MONGO_URI || mongoURI;
 mongoose.connect(mongoURI);
 
 mongoose.connection.once('open', () => {
-    // console.log('connected to mongoDB for BudgetBook')
+    console.log('connected to mongoDB for BudgetBook')
 })
 
 app.use(express.static('public')); 
