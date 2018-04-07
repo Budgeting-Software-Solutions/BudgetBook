@@ -31,11 +31,11 @@ class Home extends Component {
   this.handleChange = this.handleChange.bind(this);
   this.addSub = this.addSub.bind(this);
   }
-
+  
   handleChange(event, index, value) {
       this.setState({value})
   };
-  
+  // function for add and subtracting transaction amount from category
   addSub(){
       let amount = document.getElementById("addTransaction").value; 
       let trimmedAmount = amount.trim(); 
@@ -63,7 +63,6 @@ class Home extends Component {
       );
       listOfSpendingLimits.push(this.props.state[category].spendingLimit);
     };
-    console.log("LISTOFSPENDINGLIMITS", listOfSpendingLimits);
     let category = [];
     let dottedBase = +new Date();
     let lineData = [];
