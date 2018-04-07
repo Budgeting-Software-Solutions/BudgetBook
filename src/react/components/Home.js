@@ -11,7 +11,6 @@ import ReactEcharts from 'echarts-for-react';
 import actionCreator from "../../redux/actionCreators.js";
 
 const mapStateToProps = (state) => {
-  //console.log(state);
   return {    
   departmentList: Object.keys(state),
   state: state
@@ -32,21 +31,17 @@ class Home extends Component {
   this.handleChange = this.handleChange.bind(this);
   this.addSub = this.addSub.bind(this);
   }
-
+  
   handleChange(event, index, value) {
       this.setState({value})
   };
-  
+  // function for add and subtracting transaction amount from category
   addSub(){
       let amount = document.getElementById("addTransaction").value; 
-      // trim white spaces 
       let trimmedAmount = amount.trim(); 
-      let target = this.props.departmentList[this.state.value];
-      // console.log("AMOUNT", amount);
-      // console.log("TARGET", target);  
+      let target = this.props.departmentList[this.state.value]; 
       var regexp = /[A-Z!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/gi;
       var matches_array = trimmedAmount.match(regexp);
-      // if there are non numeric characters in the string, we will not be running the addTransaction function
       if(matches_array === null){
         this.props.addTransaction(target, parseInt(trimmedAmount));
       }
@@ -61,30 +56,18 @@ class Home extends Component {
     let listTotalTransaction = []; 
     let listOfSpendingLimits = [];
     for (let category in this.props.state){
-      
       listTotalTransaction.push(
         this.props.state[category].transactions.reduce((acc, cv)=>{
           return acc+=cv; 
         }, 0) 
       );
-      // pushing in each category's spending limit
       listOfSpendingLimits.push(this.props.state[category].spendingLimit);
     };
-    console.log("LISTOFSPENDINGLIMITS", listOfSpendingLimits);
-    //console.log("!!!!!!!!!!!!",listTotalTransaction);
     let category = [];
     let dottedBase = +new Date();
     let lineData = [];
     let barData = [];
-    // let departmentListName = this.props.department.map(ele => {
-    //   return [ele];
-    // })
-    //console.log("DepartmentListName!!!!!",departmentListName);
-    // let departmentListBudget = this.props.department.map(ele => {
-    //   return ele.departmentBudget;
-    // })
     let departmentDropDownList = []
-    console.log("departmentList!!!!!!!!",this.props.departmentList);
     for (let i = 0; i < this.props.departmentList.length; i++) {
       lineData.push(parseInt(listOfSpendingLimits[i]));
       barData.push(parseInt(listTotalTransaction[i]));
