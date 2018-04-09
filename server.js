@@ -6,7 +6,7 @@ const app = express();
 const dbController = require('./db/dbController');
 
 const mongoose = require('mongoose');
-const mongoURI = 'mongodb://budgetbook:budgetbook@ds125469.mlab.com:25469/budgetbook'; 
+const mongoURI = ""; 
 const URI = process.env.MONGO_URI || mongoURI;
 
 mongoose.connect(mongoURI);
